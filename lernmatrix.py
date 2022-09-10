@@ -10,14 +10,16 @@ import numpy as np
 
 class Lernmatrix():
 
-    def __init__():
+    def __init__(self, input_length, output_length):
         '''
         '''
+        # Creates the initial instance of the matrix
+        self.M = np.matrix(np.tile(np.zeros(input_length),(output_length,1)))
 
-    def learn(input_length, output_length):
+    def learn():
         '''
         '''
-        M = np.matrix(np.repeat(np.zeros(input_length),output_length))
+        
 
     def recall():
         '''
