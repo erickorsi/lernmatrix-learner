@@ -12,9 +12,30 @@ from .utils import _input_validation
 
 class Lernmatrix():
     '''
+    Steinbuch Lernmatrix object.
+
+    Attributes
+    ----------
+    x_length : int
+        Size of main input list and number of columns in the lernmatrix.
+    y_length : int
+        Size of output list and number of rows in the lernmatrix.
+    epsilon : float, default=1.0
+        Increment value of the lernmatrix learning process.
+        Can be any positive number.
+    M : numpy matrix
+        The lernmatrix itself, initiallized according to x_length and y_length.
+        All initial values are 0.
+
+    Methods
+    ----------
+    learn(...)
+    recall(...)
+
+    Information on the methods can be seen with help() function.
     '''
 
-    def __init__(self, x_length, y_length, epsilon=1):
+    def __init__(self, x_length, y_length, epsilon=1.0):
         self.x_length = x_length
         self.y_length = y_length
         self.epsilon = epsilon
