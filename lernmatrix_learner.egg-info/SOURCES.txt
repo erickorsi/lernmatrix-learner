@@ -1,0 +1,7 @@
+README.md
+setup.py
+lernmatrix_learner.egg-info/PKG-INFO
+lernmatrix_learner.egg-info/SOURCES.txt
+lernmatrix_learner.egg-info/dependency_links.txt
+lernmatrix_learner.egg-info/requires.txt
+lernmatrix_learner.egg-info/top_level.txt
