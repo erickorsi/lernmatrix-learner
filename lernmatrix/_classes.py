@@ -14,6 +14,16 @@ class Lernmatrix():
     '''
     Steinbuch Lernmatrix object.
 
+    Parameters
+    ----------
+    x_length : int
+        Size of main input list and number of columns in the lernmatrix.
+    y_length : int
+        Size of output list and number of rows in the lernmatrix.
+    epsilon : float, default=1.0
+        Increment value of the lernmatrix learning process.
+        Can be any positive number.
+
     Attributes
     ----------
     x_length : int
