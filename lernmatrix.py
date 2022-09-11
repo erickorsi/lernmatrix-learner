@@ -9,10 +9,10 @@ Lernmatrix class methods.
 import numpy as np
 
 class Lernmatrix():
+    '''
+    '''
 
     def __init__(self, x_length, y_length, epsilon=1):
-        '''
-        '''
         self.x_length = x_length
         self.y_length = y_length
         self.epsilon = epsilon
