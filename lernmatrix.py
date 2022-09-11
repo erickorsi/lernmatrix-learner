@@ -32,30 +32,48 @@ class Lernmatrix():
         # Runs inputs through Lernmatrix ruleset
         for row in range(self.y_length):
             for col in range(self.x_length):
-                if (Y[row] == 0):
+                if (Y[row]==0):
                     val = 0
-                elif (X[col] == 1):
+                elif (X[col]==1):
                     val = self.epsilon
                 else:
                     val = -self.epsilon
 
+                # Changes values in the matrix
                 self.M[row,col] += val
 
         return 0
 
-    def recall():
+    def recall(self, X):
         '''
         '''
+        # Validation of data
+        if (len(X)!=self.x_length): # Size of input
+            return 1
+        if (np.any([(x!=0 and x!=1) for x in X])): # Values of input
+            return 2
+
+        # Dot product of matrix with input
+        Y_temp = np.asarray(np.dot(self.M, X)).reshape(-1)
+
+        # Get binary array based on max value of result
+        y_max = np.amax(Y_temp)
+        Y = np.array([1 if y==y_max else 0 for y in Y_temp])
+
+        return Y
 
 
 
+
+'''
 lm = Lernmatrix(3,4)
 lm.M
 lm.learn([1,1,1],[1,1,1,1])
 lm.M
 lm.learn([1,0,0],[0,1,1,0])
 lm.M
-lm.learn([2,1,1],[0,0,0,0])
-lm.M
-lm.learn([1,1,1,0],[0,0,0,0])
-lm.M
+
+M = lm.M
+x = [1,0,0]
+Y_temp = np.asarray(np.dot(M, x)).reshape(-1)
+'''
