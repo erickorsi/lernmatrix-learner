@@ -8,6 +8,8 @@ Lernmatrix class methods.
 """
 import numpy as np
 
+from ..utils import _input_validation
+
 class Lernmatrix():
     '''
     '''
@@ -35,6 +37,10 @@ class Lernmatrix():
             Binary sequence representing the expected output (associated input).
             Must be the same length as the Lernmatrix output length.
             Ex.: [1,0,0,1,...,1,0,1]
+
+        Returns
+        ----------
+        None
         '''
         # Validation of data
         _input_validation(X, self.x_length)
@@ -53,10 +59,22 @@ class Lernmatrix():
                 # Changes values in the matrix
                 self.M[row,col] += val
 
-        return 0
-
     def recall(self, X):
         '''
+        Recall process of Lernmatrix of a single example.
+        Follows the set of rules described in the recall phase.
+
+        Parameters
+        ----------
+        X : array or list
+            Binary sequence representing the main input.
+            Must be the same length as the Lernmatrix input length.
+            Ex.: [1,0,0,1,...,1,0,1]
+
+        Returns
+        ----------
+        Y : array
+            Binary sequence representing the calculated output.
         '''
         # Validation of data
         _input_validation(X, self.x_length)
@@ -69,41 +87,3 @@ class Lernmatrix():
         Y = np.array([1 if y==y_max else 0 for y in Y_temp])
 
         return Y
-
-
-
-'''
-lm = Lernmatrix(4,3)
-lm.learn( X = [1,1,0,0], Y = [1,0,0] )
-lm.learn( X = [0,1,0,1], Y = [0,1,0] )
-lm.learn( X = [0,0,0,1], Y = [0,0,1] )
-
-lm.recall( X = [0,1,0,1] )
-'''
-
-
-def _input_validation(input, length):
-        '''
-        Validates the input sequence.
-        Must be of the same length as the respective matrix size;
-        Must be composed of only 0s and 1s.
-
-        Parameters
-        ----------
-        input : array or list
-            Input sequence to be validated (can be X or Y).
-        length : int
-            Expected length of this input according to the matrix structure.
-
-        Returns
-        ----------
-        None.
-        Raises Exception if invalid.
-        '''
-        try:
-            if (len(input)!=length): # Size of inputs
-                raise ValueError("Invalid length. Sequence has size {} but matrix requires size {}".format(len(input), length))
-            if (np.any([(i!=0 and i!=1) for i in input])): # Values of inputs
-                raise ValueError("Invalid values. Sequence must be binary (composed of 0s and 1s).")
-        except TypeError:
-            raise TypeError("Invalid input type. Input must be an itterable list or array.")
