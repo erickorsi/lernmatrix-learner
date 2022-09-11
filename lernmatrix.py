@@ -24,8 +24,12 @@ class Lernmatrix():
         '''
         '''
         # Validation of data
-        # check size and binary values
+        if (len(X)!=self.x_length or len(Y)!=self.y_length): # Size of inputs
+            return 1
+        if (np.any([(x!=0 and x!=1) for x in X]) or np.any([(y!=0 and y!=1) for y in Y])): # Values of inputs
+            return 2
 
+        # Runs inputs through Lernmatrix ruleset
         for row in range(self.y_length):
             for col in range(self.x_length):
                 if (Y[row] == 0):
@@ -37,6 +41,8 @@ class Lernmatrix():
 
                 self.M[row,col] += val
 
+        return 0
+
     def recall():
         '''
         '''
@@ -44,7 +50,12 @@ class Lernmatrix():
 
 
 lm = Lernmatrix(3,4)
+lm.M
 lm.learn([1,1,1],[1,1,1,1])
 lm.M
 lm.learn([1,0,0],[0,1,1,0])
+lm.M
+lm.learn([2,1,1],[0,0,0,0])
+lm.M
+lm.learn([1,1,1,0],[0,0,0,0])
 lm.M
