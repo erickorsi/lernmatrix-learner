@@ -8,7 +8,7 @@ Lernmatrix class methods.
 """
 import numpy as np
 
-from ..utils import _input_validation
+from .utils import _input_validation
 
 class Lernmatrix():
     '''
