@@ -66,14 +66,10 @@ class Lernmatrix():
 
 
 '''
-lm = Lernmatrix(3,4)
-lm.M
-lm.learn([1,1,1],[1,1,1,1])
-lm.M
-lm.learn([1,0,0],[0,1,1,0])
-lm.M
+lm = Lernmatrix(4,3)
+lm.learn( X = [1,1,0,0], Y = [1,0,0] )
+lm.learn( X = [0,1,0,1], Y = [0,1,0] )
+lm.learn( X = [0,0,0,1], Y = [0,0,1] )
 
-M = lm.M
-x = [1,0,0]
-Y_temp = np.asarray(np.dot(M, x)).reshape(-1)
+lm.recall( X = [0,1,0,1] )
 '''
