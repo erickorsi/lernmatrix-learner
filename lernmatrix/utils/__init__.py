@@ -30,4 +30,4 @@ def _input_validation(input, length):
             if (np.any([(i!=0 and i!=1) for i in input])): # Input values
                 raise ValueError("Invalid values. Sequence must be binary (composed of 0s and 1s).")
         except TypeError: # Input datatype
-            raise TypeError("Invalid type. Input must be an itterable list or array.")
+            raise TypeError("Invalid type. Input must be a non-string itterable list or array.")

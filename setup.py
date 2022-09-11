@@ -8,5 +8,9 @@ setup(
 
     url='https://github.com/erickorsi/lernmatrix-learner',
     author='Erick Hotta Orsi',
-    author_email='erickorsig@gmail.com'
+    author_email='erickorsig@gmail.com',
+    py_modules=['lernmatrix'],
+    install_requires=[
+        'numpy',
+    ]
 )
