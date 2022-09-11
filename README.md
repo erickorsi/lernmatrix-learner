@@ -6,7 +6,7 @@ Lernmatrix structure for conditional learning and recall, based on human hippoca
 pip3 install lernmatrix-learner
 ```
 
-## Source code
+## From Source code
 
 ```
 git clone https://github.com/erickorsi/lernmatrix-learner
