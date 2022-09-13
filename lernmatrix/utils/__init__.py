@@ -6,7 +6,7 @@ Created on Mon Sep 11 12:19 2022
 """
 import numpy as np
 
-def _input_validation(input, length):
+def _input_validation(input, length, binary=False):
         '''
         Validates the input sequence.
         Must be of the same length as the respective matrix size;
@@ -18,6 +18,9 @@ def _input_validation(input, length):
             Input sequence to be validated (can be X or Y).
         length : int
             Expected length of this input according to the matrix structure.
+        binary : boolean, default=False
+            If the sequence needs to be binary or not.
+            For the output, the sequence should be binary, defining different classes in a simple manner.
 
         Returns
         ----------
@@ -28,6 +31,13 @@ def _input_validation(input, length):
             if (len(input)!=length): # Input size
                 raise ValueError("Invalid length. Sequence has size {} but matrix requires size {}".format(len(input), length))
             if (np.any([(i!=0 and i!=1) for i in input])): # Input values
-                raise ValueError("Invalid values. Sequence must be binary (composed of 0s and 1s).")
+                if (binary==True):
+                    raise ValueError("Invalid values. Check if output is binary.")
+                print("Detected real-valued sequence.")
+                return 1 # Non-binary values. Will be treated as real-valued input.
+            else:
+                if (binary==False):
+                    print("Detected binary sequence.")
+                    return 0
         except TypeError: # Input datatype
             raise TypeError("Invalid type. Input must be a non-string itterable list or array.")
