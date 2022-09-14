@@ -32,12 +32,12 @@ def _input_validation(input, length, binary=False):
                 raise ValueError("Invalid length. Sequence has size {} but matrix requires size {}".format(len(input), length))
             if (np.any([(i!=0 and i!=1) for i in input])): # Input values
                 if (binary==True):
-                    raise ValueError("Invalid values. Check if output is binary.")
-                print("Detected real-valued sequence.")
+                    raise ValueError("Invalid values. If binary=True, the values sequences must be composed of 0s and 1s. The classes should always be binary.")
                 return 1 # Non-binary values. Will be treated as real-valued input.
             else:
-                if (binary==False):
-                    print("Detected binary sequence.")
-                    return 0
+                if (binary==True):
+                    return 0 # Binary valued classification.
+                else:
+                    return 1 # Real-valued classification may still have binary sequences.
         except TypeError: # Input datatype
             raise TypeError("Invalid type. Input must be a non-string itterable list or array.")
