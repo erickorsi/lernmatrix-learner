@@ -198,3 +198,4 @@ class Lernmatrix():
             Y = self.recall(Y, recurring=True)
 
         return Y
+ 
