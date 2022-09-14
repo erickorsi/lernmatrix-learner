@@ -188,7 +188,7 @@ class Lernmatrix():
             M_temp = np.asarray(self.M) * X_inv
             # Get sum of rows from absolute asymptotic matrix
             Y_temp = np.sum(np.abs(np.tanh(M_temp-1)), axis=1)
-            # Get binary array based  on min value of result
+            # Get binary array based on min value of result
             y_min = np.amin(Y_temp)
             Y = np.array([1 if y==y_min else 0 for y in Y_temp])
 
