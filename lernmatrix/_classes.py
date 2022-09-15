@@ -38,8 +38,9 @@ class Lernmatrix():
         in order to associate the expected output with slightly different sequences.
         Allows the model to reduce error from noisy inputs.
         Can only be used for cases where classes are not defined by single values in the sequence. Ex.:
-        YES: [1,1,0,0,1,0,0,1] or [0,1,0,0,0,1,1,0]
-        NO : [0,0,0,0,0,0,0,1] or [0,0,0,0,0,0,1,0]
+        YES: [1,1,0,0,0,0], [0,0,1,1,0,0] and [0,0,0,0,1,1]
+        NO : [1,0,0], [0,1,0] and [0,0,1]
+        Can only be used With square matrices, where length of X = length of Y.
     bit_error : float, default=0.01
         Only used when autoassociate = True.
         The percentage of values changed from the output when auto-associating,
@@ -136,15 +137,12 @@ class Lernmatrix():
 
         # Auto-association
         if (self.autoassociate==True and recurring==False):
-            vals_change = np.random.randint(0, range(len(Y)), size=np.ceil(len(Y)*self.bit_error)) # Random indexes to change
+            vals_change = np.random.randint(0, len(Y), size=np.ceil(len(Y)*self.bit_error).astype(int)) # Random indexes to change
             Y_mod = np.copy(Y)
             for n in vals_change:
-                if (self.binary==True):
-                    Y_mod[n] = np.abs(Y_mod[n]-1) # Changes the value between 0 and 1
-                else:
-                    Y_mod[n] = np.random.uniform(np.amin(Y), np.amax(Y), (np.amax(Y)-np.amin(Y))*100) # Selects a random value within the range of the current Y
+                Y_mod[n] = np.abs(Y_mod[n]-1) # Changes the value between 0 and 1
             # Auto-associate the changed expected output with the expected output
-            self.learn(Y_mod, Y, recurring=True)
+            self.learn(Y_mod, Y, "recur")
 
     def recall(self, X, *args):
         '''
@@ -184,18 +182,18 @@ class Lernmatrix():
         # Real-valued Lernmatrix
         else:
             # Get multiplicative matrix from inverse input
-            X_inv = np.array([1/x for x in X])
+            X_inv = np.array([1/x if x!=0 else 1/self.epsilon for x in X])
             M_temp = np.asarray(self.M) * X_inv
             # Get sum of rows from absolute asymptotic matrix
             Y_temp = np.sum(np.abs(np.tanh(M_temp-1)), axis=1)
             # Get binary array based on min value of result
             y_min = np.amin(Y_temp)
             Y = np.array([1 if y==y_min else 0 for y in Y_temp])
-
+        
         # Auto-association validation
         if (self.autoassociate==True and recurring==False):
             # Attempts to get the class associated to the inaccurate result in case of classification error
-            Y = self.recall(Y, recurring=True)
+            Y = self.recall(Y, "recur")
 
         return Y
  
