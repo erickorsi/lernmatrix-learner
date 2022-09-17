@@ -104,7 +104,7 @@ class Lernmatrix():
 
         Returns
         ----------
-        None
+        None.
         '''
         # Args handling
         if (len(args)==0):
@@ -196,4 +196,22 @@ class Lernmatrix():
             Y = self.recall(Y, "recur")
 
         return Y
+
+    def fit(self, X, Y, binary=False, autoassociate=False, bit_Error=0.01):
+        '''
+        Learning process using a dataset.
+        Runs the learn method for each element in the dataset.
+
+        Parameters
+        ----------
+        X : pandas DataFrame
+            Dataframe containing the dependent variables, or the sequences for input data.
+        Y : pandas DataFrame
+            Dataframe containing the classes for each element in X.
+            Must be the same length and order as X.
+
+        Returns
+        ----------
+        None.
+        '''
  
